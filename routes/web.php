@@ -20,4 +20,5 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/users/{user}', 'UsersController@show')->name('users.show');
+Route::resource('users', 'UsersController',['only' => ['show', 'update', 'edit']]);
+//Route::get('/users/{user}', 'UsersController@show')->name('users.show');
