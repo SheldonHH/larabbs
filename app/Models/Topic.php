@@ -16,7 +16,7 @@ class Topic extends Model
     {
         return $this->belongsTo(User::class);
     }
-
+    // laravel的本地作用域
     public function scopeWithOrder($query, $order){
         switch($order){
             case 'recent':
@@ -26,7 +26,7 @@ class Topic extends Model
                 $query->recentReplied();
                 break;
         }
-        return $query->with('user');
+        return $query->with('user', 'category');
     }
     // 预加载 防止 N+1 问题
 
@@ -34,7 +34,7 @@ class Topic extends Model
         // for new ply, we will write logic, 更新话题 reply_count
         // trigger tthe data_model, updated_at timestamp
         return $query->orderBy('updated_at', 'desc');
-    }
+}
 
     public function scopeRecent($query){
         // orderBy

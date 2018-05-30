@@ -8,22 +8,24 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
     <title>@yield('title', 'LaraBBS') - Laravel 进阶教程</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('style')
 </head>
 
 <body>
 <div id="app" class="{{ route_class() }}-page">
-
+<!--自定义辅助方法：route_class()  -->
     @include('layouts._header')
 
     <div class="container">
-
+      <!-- 导航区加入子模板 -->
         @include('layouts._message')
         @yield('content')
-
+        <!--允许继承该模板，并注入内容  -->
     </div>
 
     @include('layouts._footer')
