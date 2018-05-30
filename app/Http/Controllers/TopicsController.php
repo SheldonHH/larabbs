@@ -11,10 +11,33 @@ use Auth;
 
 class TopicsController extends Controller
 {
+    //做了中间件的认证，必须登录权限才能进行修改
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
+    // server端的上传图片
+    public function uploadImage(Request $request, ImageUploadHandler $uploader){
+      // 初始化
+        $data = [
+            'success' => false,
+            'msg' => '上传失败',
+            'file_path' => ''
+        ];
+        //
+        if($file = $request->upload_file){
+          // 图片保存在本地
+          $result = $uploader->save($request->upload_file, 'topics', \Auth::id(),1024);
+          // 保存成功的话，即result存在的话
+          if($result){
+            $data['file_path'] = $result['path'];
+            $data['msg'] = '上传成功！';
+            $data['success'] = true;
+          }
+        }
+        return $data;
+    }
+
 
     public function index()
     {
