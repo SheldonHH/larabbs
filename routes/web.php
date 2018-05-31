@@ -27,3 +27,5 @@ Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('upload_image', 'TopicsController@uploadImage')->name('topics.upload_image');
