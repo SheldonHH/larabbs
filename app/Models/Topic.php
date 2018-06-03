@@ -40,4 +40,9 @@ class Topic extends Model
         // orderBy
         return $query->orderBy('created_at', 'desc');
     }
+
+    public function link($params = []){
+      return route('topics.show', array_merge([$this->id, $this->slug], $params));
+      // return redirect()->to($topic->link())->with('success', '成功创建话题！');
+    }
 }

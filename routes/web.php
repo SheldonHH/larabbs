@@ -28,3 +28,6 @@ Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// {topic} 隐形路由绑定模式，会自动注入ID对应的Topic Instance
+Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show');
